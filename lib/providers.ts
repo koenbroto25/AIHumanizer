@@ -35,7 +35,7 @@ function sanitizeUrl(input: string): string {
 
 function sanitizeGeminiModel(model: string): string {
   const trimmed = model.trim();
-  // Gemini model IDs are expected to be simple identifiers like "gemini-1.5-flash".
+  // Gemini model IDs are expected to be simple identifiers like "gemini-2.5-flash".
   // Restrict to safe characters so user input cannot alter URL structure.
   if (!/^[A-Za-z0-9._-]+$/.test(trimmed)) {
     throw new Error('Invalid Gemini model identifier');
@@ -111,8 +111,8 @@ export const PROVIDERS: Provider[] = [
     apiUrl: 'https://generativelanguage.googleapis.com/v1beta/models',
     getApiKeyUrl: 'https://aistudio.google.com/apikey',
     docsUrl: 'https://ai.google.dev/docs',
-    defaultModel: 'gemini-1.5-flash',
-    models: ['gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-pro'],
+    defaultModel: 'gemini-2.5-flash',
+    models: ['gemini-2.5-flash'],
     placeholder: 'AIza...',
   },
   {
@@ -204,7 +204,7 @@ export const PROVIDERS: Provider[] = [
     models: [
       'meta-llama/llama-3.1-70b-instruct',
       'meta-llama/llama-3.1-8b-instruct',
-      'google/gemini-flash-1.5',
+      'google/gemini-2.5-flash',
       'anthropic/claude-3.5-sonnet',
       'openai/gpt-4o',
       'mistralai/mistral-large',
@@ -659,7 +659,7 @@ async function geminiGenerate(
   apiKey: string,
   systemPrompt: string,
   userPrompt: string,
-  model: string = 'gemini-1.5-flash',
+  model: string = 'gemini-2.5-flash',
   options: GenerationOptions = {}
 ): Promise<string> {
   const safeModel = encodeURIComponent(sanitizeGeminiModel(model));
